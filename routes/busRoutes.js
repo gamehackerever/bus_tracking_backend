@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Bus = require('../models/Bus');
+const driverController = require('../controllers/driverController');
 
 router.post('/buses', async (req, res) => {
   try {
@@ -24,6 +25,8 @@ router.post('/buses', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.post('/login', driverController.login);
 
 router.get('/', (req, res) => {
   res.send('Welcome to Bus Tracking API');
