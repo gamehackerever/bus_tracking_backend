@@ -2,24 +2,38 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Bus = sequelize.define('Bus', {
-  busId: {
+  bus_id: {
     type: DataTypes.STRING,
-    primaryKey: true
+    primaryKey: true,
   },
-  latitude: {
-    type: DataTypes.FLOAT,
+  license_number: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  capacity: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
-  longitude: {
-    type: DataTypes.FLOAT,
+  assigned_route_id: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
-  lastUpdated: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
+  assigned_driver_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
+  tableName: 'Bus',
   timestamps: false
 });
 
+  Bus.associate = models => {
+    Bus.belongsTo(models.Route, { foreignKey: 'assigned_route_id' });
+    Bus.hasMany(models.Student, { foreignKey: 'assigned_bus_id' });
+    Bus.hasMany(models.Feedback, { foreignKey: 'bus_id' });
+    Bus.hasMany(models.Notification, { foreignKey: 'bus_id' });
+    Bus.hasMany(models.Location, { foreignKey: 'bus_id' });
+  };
+
 module.exports = Bus;
+
