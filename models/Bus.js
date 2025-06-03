@@ -5,6 +5,7 @@ const Bus = sequelize.define('Bus', {
   bus_id: {
     type: DataTypes.STRING,
     primaryKey: true,
+    allowNull: false,
   },
   license_number: {
     type: DataTypes.STRING,
@@ -14,12 +15,8 @@ const Bus = sequelize.define('Bus', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  assigned_route_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  assigned_driver_id: {
-    type: DataTypes.INTEGER,
+  isRunning: {
+    type: DataTypes.BOOLEAN,
     allowNull: false
   }
 }, {
@@ -28,8 +25,6 @@ const Bus = sequelize.define('Bus', {
 });
 
   Bus.associate = models => {
-    Bus.belongsTo(models.Route, { foreignKey: 'assigned_route_id' });
-    Bus.hasMany(models.Student, { foreignKey: 'assigned_bus_id' });
     Bus.hasMany(models.Feedback, { foreignKey: 'bus_id' });
     Bus.hasMany(models.Notification, { foreignKey: 'bus_id' });
     Bus.hasMany(models.Location, { foreignKey: 'bus_id' });

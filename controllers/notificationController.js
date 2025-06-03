@@ -1,12 +1,12 @@
 const admin = require("../firebase");
 
 exports.pushNotifsStudent = async (req, res) => {
-  const { name, title, to_whom, message, timestamp } = req.body;
+  const { name, topic, to_whom, message, timestamp } = req.body;
 
   const notif = {
     topic: "notifications-student",
     notification: {
-      title: `${title}`,
+      title: `${topic}`,
       body: `${message}`,
     }
   };
@@ -21,12 +21,12 @@ exports.pushNotifsStudent = async (req, res) => {
 };
 
 exports.pushNotifsDriver = async (req, res) => {
-  const { name, title, to_whom, message, timestamp } = req.body;
+  const { name, topic, to_whom, message, timestamp } = req.body;
 
   const notif = {
     topic: "notifications-driver",
     notification: {
-      title: `${title}`,
+      title: `${topic}`,
       body: `${message}`,
     }
   };
@@ -41,12 +41,12 @@ exports.pushNotifsDriver = async (req, res) => {
 };
 
 exports.pushNotifsBoth = async (req, res) => {
-  const { name, title, to_whom, message, timestamp } = req.body;
+  const { name, topic, to_whom, message, timestamp } = req.body;
 
   const notif = {
     topic: "notifications",
     notification: {
-      title: `${title}`,
+      title: `${topic}`,
       body: `${message}`,
     }
   };
