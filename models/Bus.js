@@ -15,8 +15,8 @@ const Bus = sequelize.define('Bus', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  isRunning: {
-    type: DataTypes.BOOLEAN,
+  assigned_route_id: {
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 }, {
@@ -25,6 +25,7 @@ const Bus = sequelize.define('Bus', {
 });
 
   Bus.associate = models => {
+    Bus.hasMany(models.RouteStop, { foreignKey: 'assigned_route_id' });
     Bus.hasMany(models.Feedback, { foreignKey: 'bus_id' });
     Bus.hasMany(models.Notification, { foreignKey: 'bus_id' });
     Bus.hasMany(models.Location, { foreignKey: 'bus_id' });

@@ -5,6 +5,7 @@ const RouteStop = sequelize.define('RouteStop', {
   route_stop_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true
   },
   route_id: {
     type: DataTypes.INTEGER,
